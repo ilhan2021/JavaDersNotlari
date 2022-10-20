@@ -1,0 +1,42 @@
+// ödev
+// hastane database, hastalar, doktorlar collections oluştur. 
+//ad,soyad, doktorsa maaş ve uzmanlığı, hastaysa hastalığı gir (çoklu veri girişi ile). 
+//maası sundan büyük olan veya uzmanlığı .......olan doktorları, 
+//maası ........olanları listele,en yüksek 3 ü seç, hastaları alfabetik sırala
+use( "HASTANE");
+db.createCollection( "hastalar");
+db.createCollection( "doktorlar");
+use("HASTANE");
+db.doktorlar.insertMany([
+    { "ad": "kemal", "soyad": "tren", "uzmanlik": "pediatri", "maas":8500},
+    { "ad": "temel", "soyad": "yalcin", "uzmanlik": "dermatoloji", "maas": 8500},
+    { "ad": "ela", "soyad": "derin", "uzmanlik": "kbb", "": 11500},
+    { "ad": "toprak", "soyad": "kutlu", "uzmanlik": "dahiliye", "maas": 10000},
+    { "ad": "yeşim", "soyad": "tatli", "uzmanlik": "göz", "maas": 8000},
+    { "ad": "koray", "soyad": "yesil", "uzmanlik": "ortopedi", "maas": 9500},
+    { "ad": "bora", "soyad": "duru", "uzmanlik": "plastikCerrahi", "maas": 12500},
+    
+]);
+use("HASTANE");
+db.hastalar.insertMany([
+    { "ad": "Ali", "soyad": "Gel",  "tani": "Tasikardi"},
+     { "ad": "Emel", "soyad": "Kos",  "tani": "reflu"},
+      { "ad": "Ufuk", "soyad": "Mavi",  "tani": "koah"},
+       { "ad": "Derya", "soyad": "Deniz",  "tani": "diyabet"},
+        { "ad": "Rüzgar", "soyad": "Bulut",  "tani": "yanik"},
+
+]);
+
+//1)maası 9000den büyük olan veya uzmanlığı kbb olan doktorları, 
+//maası ........olanları listele
+
+
+
+//2)Maasi 8500 olanlari listele;
+
+
+// 3)En yüksek maasli 3 kisiyi sec;
+
+
+//4)hastaları alfabetik sırala
+

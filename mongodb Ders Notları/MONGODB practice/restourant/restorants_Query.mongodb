@@ -1,0 +1,43 @@
+odev
+//QUERY 01 ...
+//coord değeri -95.754168'den küçük olan restoranları bulmak için bir MongoDB query create ediniz.
+
+
+//QUERY 02 ...
+//-65.754168 'den küçük boylamda yer alan ve 70'den fazla score alan 'Amerikan' mutfağı (cuisine) hazırlamayan restoranları bulmak için bir MongoDB query create ediniz.
+
+
+//QUERY 03 ...
+//Herhangi bir 'Amerikan' mutfağı hazırlamayan ve Brooklyn borough a ait olmayan, 'A' score alan restoranları bulmak için bir MongoDB query create ediniz. Belge, mutfağa göre azalan sırada görüntülenmelidir. 
+
+
+
+//QUERY 04 ...
+//Adının son üç harfi 'ces' olan restoranlar için restoran kimliği, adı, ilçesi ve mutfağını bulmak için bir MongoDB query create ediniz.
+
+
+
+//QUERY 05 ...
+//Bronx borough a ait , Amerikan veya Çin yemeği hazırlayan restoranları bulmak için bir MongoDB query create ediniz.
+
+
+
+
+//QUERY 06 ...
+//Puanı 10'dan fazla olmayan restoranların restoran id si, adı, ilçesi ve mutfağını bulmak için bir MongoDB query create ediniz.
+
+
+
+
+ //QUERY 07 ...
+//Koordinat (coord[]) dizisinin 2. elemanı 42'den fazla ve 52'ye kadar bir değer içeren restoranların restoran id, adı, adresi ve coğrafi konumunu (coords) bulmak için bir MongoDB query create ediniz.
+
+
+
+//QUERY 08 ...
+//Mutfağın adını artan sırada düzenlemek için bir MongoDB query create ediniz ve aynı mutfak için ilçe azalan sırada olmalıdır.
+
+
+
+//QUERY 09 ... grades dizisinin  herhangi bir öğesinin, (grade) bir "A" notu içerdiği ve bir ISODate "2014-08-11T00:00:00Z" tarihinde 9 score aldığı restoranlar için restoran id sini, adını ve grades in sadece belirtilen elemanını  bulmak için bir MongoDB query create ediniz.
+

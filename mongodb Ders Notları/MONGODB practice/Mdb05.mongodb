@@ -1,0 +1,189 @@
+///==================================================================================
+//                                  AGGREGATION
+//==================================================================================
+// 1) Aggregation, dokumanlardaki verilerin islenmesi ve hesaplanan 
+//    sonuclarin donmesini saglayan islemlerdir. 
+//
+// 2) Aggregation islemleri, farklı dokumanlardaki degerleri gruplandirabilir.
+//
+// 3) Bu gruplanan veriler uzerinde cesitli islemlerin gereceklestirelerek tek 
+//    bir sonuc degerinin donmesi saglanabilir.
+//
+// 4) MongoDB, 3 farklı yontem ile aggregation gerceklestirmeye izin verir.
+//     A) aggregation pipeline (toplama boru hattı) --> best practice...
+//     B) map-reduce function (map indirgeme)
+//     C) single-purpose aggregation (tek-amaç toplama) 
+//
+// 5) Aggregiation, SQL'deki Join islemlerine benzetilebilir. 
+//
+//     SQL         MONGO
+//----------------------
+//     WHERE       $match
+//     GROUP BY    $group
+//     HAVING	   $match
+//     SELECT	   $project
+//     ORDER BY    $sort
+//     LIMIT	   $limit
+//     SUM()	   $sum
+//     COUNT()	   $count, $sum
+//     JOIN	   $lookup
+//     MERGE 	   $merge (MongoDB 4.2 ve sonrasi)
+// aggregation (sum,max,avg vs atomic operator) yaparken bi field (column) kullanacaksak syntax -> "$urunAdi" 
+
+//==================================================================================
+//                          AGGREGATION PIPELINE
+//==================================================================================
+// SYNTAX
+// 
+//   pipeline = [
+//   { $match : { … },
+//   { $group : { … },
+//   { $sort : { … },
+//      ...
+//   ]
+//   db.collectionName.aggregate({pipeline}, {options})
+//
+//  $match() –> Verileri secerken flitrelemek icin
+//  $group({_id : "$field"}) - >islenen verilerin gruplanmasi icin 
+//  $sort() -> Sonuclarin siralanmasi icin
+
+
+use("okul")
+db.ogrenciler.insertMany([
+{"isim": "Tarik ", "yas":57, "sube": "A", "not":97, "dersler":["fizik", "mat"]}, 
+{"isim": "Selim", "yas":37, "sube": "A","not":77},
+{"isim": "Galip", "yas":37, "sube": "A","not":34, "dersler":["ingilizce"]},
+{"isim": "Teslime", "yas":24, "sube": "A","not":88, "dersler":["mat","fizik","kimya"]},
+{"isim": "Nalan", "yas":67, "sube": "B","not":55, "dersler":["fizik", "ingilizce"]},
+{"isim": "Burhan", "yas":21, "sube": "B","not":43, "dersler":["fizik", "mat"]},
+{"isim": "Niyazi", "yas":40, "sube": "B","not":99, "dersler":["ingilizce"]}])
+
+
+///---------------------------------------------------------------------------------
+// QUERY 01 ...  yasi 30'dan buyuk olan ogrencileri sorgulayiniz.   
+//---------------------------------------------------------------------------------
+
+//--------------------------------------------------------------------------------
+// QUERY 02 ...  dersler i sadece ingilizce ve yasi 70'dan kucuk olan ogrencileri sorgulayiniz.   
+//---------------------------------------------------------------------------------
+
+//---------------------------------------------------------------------------------
+// QUERY 03 ...  B-subesindeki ogrenci sayisini hesaplayan query create ediniz.
+//               NOT: SAYMAK icin  $match icerisinde $count metodu kullanilabilir. 
+//---------------------------------------------------------------------------------
+
+ )
+// NOT:Sadece saymak icin dogrudan db.colection.count() metoduda kullanilabilir.
+//     Bu yonteme single-purpose aggregation metotlari denilmektir.
+//     Ancak bu islem aggregetion’daki gibi sorgu cevabi dondurmez. Sadece hesaplanan
+//     sonucu dondurur.tırnak içinde yazı (“B-Subesi Ogrenci Sayisi”) yazamayız
+
+
+//---------------------------------------------------------------------------------
+// NOT: Group isleminde degiskenlerin onune $ isareti konulmalidir.
+//      id den sonra dersler, not vs de olabilir, 
+//      $group:{_id:"$sube"}} -> şubeye göre grupla her grub yeni bir json obj.
+    
+//---------------------------------------------------------------------------------
+// QUERY 04 ...  Tum subelerdeki toplam ogrenci sayisini hesaplayan query create ediniz.
+//---------------------------------------------------------------------------------
+
+
+
+//---------------------------------------------------------------------------------
+// QUERY 05 ...  Tum subelerdeki toplam ogrenci sayilarini ve her subedeki maks notu hesaplayan  query create ediniz.
+//----------------------------------------------------------------------------------
+
+
+//---------------------------------------------------------------------------------
+// QUERY 06 ...  yasi 30'dan kucuk olanlarin subelere gore not ortalamalarini hesaplayan query create ediniz.
+//---------------------------------------------------------------------------------
+
+
+//---------------------------------------------------------------------------------
+// QUERY 07 ...  inglizce dersini alanlarin subelere gore sayilarinı hesaplayan query create ediniz.
+//               (ingilizce yanında başka derste olabilir)
+//---------------------------------------------------------------------------------
+     
+
+
+//---------------------------------------------------------------------------------
+// QUERY 08 ... fizik veya matematik alanlarin subelere gore sayilari hesaplayan query create ediniz.
+//---------------------------------------------------------------------------------
+     
+
+
+//---------------------------------------------------------------------------------
+// QUERY 09 ...  sadece Fizik ve Mat dersini alanlarin subelere gore sayilari hesaplayan query create ediniz.
+//---------------------------------------------------------------------------------
+
+
+
+//---------------------------------------------------------------------------------
+// QUERY 10 ...  A subesindeki ogrencileri yasa gore azalan sirada, nota gore yukselen sirada
+//               siralayiniz.
+//---------------------------------------------------------------------------------
+               
+
+//---------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------
+// QUERY 11 ...  MEDYA veritabanı altında hesaplar ismiyle yeni bir collection olusturunuz
+//       ve degerleri giriniz.
+//---------------------------------------------------------------------------------
+use("MEDYA")
+db.hesaplar.insertMany(
+[{"isim" : "ali", "harcamalar":[-80, -40, -50, -120], "kazanc":[100, 150]},
+{"isim" : "Can", "harcamalar" : [-60, -30, -20], "kazanc" : [200, 50, 130] },
+{"isim" : "Canan", "harcamalar" : [-80, -40, -50], "kazanc" : [300, 450] },
+{"isim" : "Betul", "harcamalar" : [-80, -120], "kazanc" : [500, 50, 70, 10] },
+{"isim" : "Ahsen", "harcamalar" : [-140, -50, -120], "kazanc" : [400] },
+{"isim" : "Su", "harcamalar" : [-120], "kazanc" : [22, 375, 65] },
+{"isim" : "Pelin", "harcamalar" : [-180, -40, -70, -12], "kazanc" : [500, 650, 400]}]); 
+
+//---------------------------------------------------------------------------------
+// QUERY 12 ...  var olan dokumanlarda her kisi icin toplam harcama, toplam kazanc ve  
+//     bakiye degerlerini hesaplayarak sorguda dokumana ekleyen query create ediniz.
+//     bakiye'ye gore siralayiniz.
+//     NOT: Sorguda olmayan bir field icin $addFields metodu kullanilabilir. 
+//---------------------------------------------------------------------------------
+
+
+//---------------------------------------------------------------------------------
+// QUERY 13 ...  hesaplar collection’nin muhasabe adinda bir kopyasini olusturalim.
+//---------------------------------------------------------------------------------
+
+//---------------------------------------------------------------------------------
+// QUERY 14 ...  hesaplar collection'nindan harcamalar kismini cikararak kazanclar adinda 
+//     yeni bir kopyasini olusturalim.
+//---------------------------------------------------------------------------------
+
+
+
+//==================================================================================
+//                                  BULKWRITE (toplu yazmak)
+//  Birden fazla islemi ayni komutla gerceklestirmek icin BulkWrite kullanilabilir.
+// https://docs.mongodb.com/manual/reference/method/db.collection.bulkWrite/
+// db.collections.bulkWrite([
+//   {insertOne:{"document": {yazar: "........", fiyat:....., yayinYili : ...... }}},
+//   {updateOne:{"filter":{yazar: "......"}, "update": {$set: {fiyat:.......}}}},
+//   {replaceOne:{"filter":{yazar:"......."}, "replacement": {yazar: "......", fiyat:.....}}},
+//   {deleteOne:{"filter" : {yazar: "........."}}}
+//    ]);
+//==================================================================================
+use("MEDYA");
+db.hikayeler.insertMany(
+[{"yazar" : "Mehmet Bak", "fiyat" : 60, "yayinYili" : 1998 },
+{"yazar" : "Ali Gel", "fiyat" : 75, "yayinYili" : 2000 },
+{"yazar" : "Su Ak", "fiyat" : 90, "yayinYili" : 2005 },
+{"yazar" : "İsmet Kaç", "fiyat" : 35, "yayinYili" : 2010 },
+{"yazar" : "Pelin Su", "fiyat" : 80, "yayinYili" : 2020 },
+{"yazar" : "Suat Ok", "fiyat" : 54, "yayinYili" : 2001},
+{"yazar" : "Pelin Su", "fiyat" : 50, "yayinYili" : 2020 }]);
+
+use("MEDYA");
+db.hikayeler.bulkWrite([
+  {insertOne:{"document": {yazar: "mirac", fiyat:100, yayinYili : 2022 }}},
+   {updateOne:{"filter":{yazar: "ali gel"}, "update": {$set: {fiyat:90}}}},
+   {replaceOne:{"filter":{yazar:"Su Ak"}, "replacement": {yazar: "yusuf atesmen", fiyat:250}}},
+  {deleteOne:{"filter" : {yazar: "ali gel"}}}
+    ]);

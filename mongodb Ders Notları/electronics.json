@@ -1,0 +1,69 @@
+[{
+  "_id": {
+    "$oid": "6338824530d1d832a7626163"
+  },
+  "price": 250,
+  "name": "Yuksek"
+},{
+  "_id": {
+    "$oid": "6338883430d1d832a7626164"
+  },
+  "name": "Yuksek",
+  "price": 243,
+  "model": "Samsung"
+},{
+  "_id": {
+    "$oid": "6338886e2291eba778f9d63c"
+  },
+  "name": "Yuksek",
+  "price": 450,
+  "model": "Arnica"
+},{
+  "_id": {
+    "$oid": "633888862291eba778f9d63d"
+  },
+  "name": "Woww",
+  "price": 80,
+  "model": "Tefal"
+},{
+  "_id": {
+    "$oid": "633889c730d1d832a7626165"
+  },
+  "name": "En Ucuz"
+},{
+  "_id": {
+    "$oid": "633889c730d1d832a7626166"
+  },
+  "name": "Iphone14"
+},{
+  "_id": {
+    "$oid": "633889c730d1d832a7626167"
+  },
+  "name": "Yuksek",
+  "price": 2000
+},{
+  "_id": {
+    "$oid": "63388b4330d1d832a7626168"
+  },
+  "name": "iron",
+  "tax": 12
+},{
+  "_id": {
+    "$oid": "63388c4f30d1d832a7626169"
+  },
+  "price": 123,
+  "name": "Woww"
+},{
+  "_id": {
+    "$oid": "63388c4f30d1d832a762616a"
+  },
+  "name": "radio",
+  "tax": 8
+},{
+  "_id": {
+    "$oid": "633b3349b2eb1d409a847083"
+  },
+  "price": 250,
+  "name": "Yuksek"
+  
+}]

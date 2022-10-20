@@ -1,0 +1,98 @@
+///==================================================================================
+//                          UNIONWITH (FULL JOIN) --> şartı olmayan genel birleştirme
+//==================================================================================
+//  - SQL'deki UNION ALL komutuna benzer.
+//  - 2 coll.'nin birlesimini gerceklestirmek icin kullanılir. 
+//  - Ornegin, $unionWith 2 farklı coll.'daki pipeline sonuclarini tek bir 
+//    sonuc setinde birlesitirir. 
+//  - Bu sonuc seti pipeline'da bir sonraki asamaya iletilebilir.
+//  - SYNTAX:
+//  - { $unionWith: { coll: "<coll.>", pipeline: [ <stage1>, ... ] } }
+//==================================================================================
+
+use("MEDYA");
+
+db.romanlar.insertMany(
+[{"yazar" : "Mehmet Bak", "fiyat" : 60, "yayinEvi" : "Yildiz", "adet": 1000 },
+{"yazar" : "Ali Gel", "fiyat" : 75, "yayinEvi" : "MaviAy", "adet": 1200 },
+{"yazar" : "Su Ak", "fiyat" : 90, "yayinEvi" : "Caliskan", "adet": 2200},
+{"yazar" : "Meryem Can", "fiyat" : 35, "yayinEvi" : "MorEv","adet": 560},
+{"yazar" : "Pelin Su", "fiyat" : 80, "yayinEvi" : "Hedef", "adet": 890 },
+{"yazar" : "Suat Ok", "fiyat" : 54, "yayinEvi" : "Sinir","adet": 245}]);
+
+use("MEDYA")
+db.denemeler.insertMany(
+[{"yazar" : "Mehmet Bak", "fiyat" : 34, "yayinEvi" : "Yildiz", "adet": 400 },
+{"yazar" : "Deniz Kos", "fiyat" : 44, "yayinEvi" : "Yildiz", "adet": 350 },
+{"yazar" : "Su Ak", "fiyat" : 50, "yayinEvi" : "MorEv", "adet": 200},
+{"yazar" : "İsmet Kaç", "fiyat" : 25, "yayinEvi" : "Hedef","adet": 800},
+{"yazar" : "Ali Gel", "fiyat" : 40, "yayinEvi" : "Hedef", "adet": 1200 },
+{"yazar" : "Meryem Can", "fiyat" : 22, "yayinEvi" : "MaviAy","adet": 300}]);
+
+//---------------------------------------------------------------------------------
+// QUERY 01 ...  Her 2 coll.'dan tum dokumanlari "adet" sutununa (field) gore ters siralayarak 
+//               listeleyiniz(FULL JOIN id gözükmesin).
+//---------------------------------------------------------------------------------
+
+
+///---------------------------------------------------------------------------------
+// QUERY 02 ... Her bir yayinevinin toplam kitap sayilarini (2 coll. icin) hesaplayan 
+//              ve siralayan query create ediniz. 
+//---------------------------------------------------------------------------------
+
+
+//---------------------------------------------------------------------------------
+// QUERY 03 ... Her bir yayinEvinin kitap (deneme ve roman) satislarindan  elde edecegi toplam 
+//              geliri hesaplayan query create ediniz. (birleşen coll. larda carpma icin $multiply)
+//---------------------------------------------------------------------------------
+
+
+
+//==================================================================================
+//                       $LOOKUP (LEFT, RIGHT, INNER JOIN) --> şartlı birleşme
+//    {
+//      $lookup:
+//      {
+//        from: <Join uygulanacak İlişki kurulacak coll.>,
+//        localField: <giris dokumanindaki ilgili yani Modelde ilişki kuracak sutunu>,
+//        foreignField: <Join yapilacak collectiondaki ilişki kurulacak sutun>,
+//        as: <İlişkilendirme sonucu gelen verilerin atanacağı alan cikis sutunu>
+//      }
+//      { $unwind:<field path> }
+//    }
+//    $unwind —>Bir collection’da en fazla elemanı olan sublist in hangisi olduğunu bulma‌ aksiyonu yapar
+//    $unwind operatörü dokümanın içerisindeki istenen listeye göre çoklama yapılmasını sağlar.
+//==================================================================================
+db.romanlar.insertMany(
+[{"yazar" : "Mehmet Bak", "fiyat" : 60, "yayinEvi" : "Yildiz", "adet": 1000 },
+{"yazar" : "Ali Gel", "fiyat" : 75, "yayinEvi" : "MaviAy", "adet": 1200 },
+{"yazar" : "Su Ak", "fiyat" : 90, "yayinEvi" : "Caliskan", "adet": 2200},
+{"yazar" : "Meryem Can", "fiyat" : 35, "yayinEvi" : "MorEv","adet": 560},
+{"yazar" : "Pelin Su", "fiyat" : 80, "yayinEvi" : "Hedef", "adet": 890 },
+{"yazar" : "Suat Ok", "fiyat" : 54, "yayinEvi" : "Sinir","adet": 245}]);
+
+use("MEDYA")
+db.siirler.insertMany(
+[{"muellif" : "Mehmet Bak", "fiyat" : 34, "yayinEvi" : "Yildiz", "adet": 400 },
+{"muellif" : "Deniz Kos", "fiyat" : 44, "yayinEvi" : "Yildiz", "adet": 350 },
+{"muellif" : "Su Ak", "fiyat" : 50, "yayinEvi" : "MorEv", "adet": 200},
+{"muellif" : "İsmet Kaç", "fiyat" : 25, "yayinEvi" : "Hedef","adet": 800},
+{"muellif" : "Ali Gel", "fiyat" : 40, "yayinEvi" : "Hedef", "adet": 1200 },
+{"muellif" : "Meryem Can", "fiyat" : 22, "yayinEvi" : "MaviAy","adet": 300}]);
+//romanlar coll. ile siirler coll. birleştirilecek
+
+//---------------------------------------------------------------------------------
+// QUERY 04 ... Her iki collectionda ortak olan yazarlarin toplam kitap sayilarini ve kitap 
+//              fiyatlarinin toplamini hesaplayan query create ediniz. 
+//              (INNER JOIN)   gözükmesini istediğimiz eklenecek field lar için ; addFields değil ,project içinde yazınız. 
+//---------------------------------------------------------------------------------
+
+
+
+//---------------------------------------------------------------------------------
+// QUERY 05 ... romanlar collectionda yer alan her bir yazarin toplam kitap sayilarini 
+//              (2 coll. icin) hesaplayan query create ediniz. 
+//---------------------------------------------------------------------------------
+
+
+

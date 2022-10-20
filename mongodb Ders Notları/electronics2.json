@@ -1,0 +1,86 @@
+[{
+  "_id": {
+    "$oid": "6338828df45115099a461b0d"
+  },
+  "price": 250,
+  "name": "Yüksek"
+},{
+  "_id": {
+    "$oid": "633883f414d1e57398497346"
+  },
+  "name": "Yüksek",
+  "price": 450
+},{
+  "_id": {
+    "$oid": "6338843814d1e5739849xcojlfcvjfjofckfklvjcffklş7347"
+  },
+ duffdzdı "name": "En Pahali"
+},{
+  "_id": {
+    "$oid": "6338845e14d1e57398497348"
+  },
+  "name": "Woww",
+  "price": 100
+},{
+  "_id": {
+    "$oid": "6338848614d1e57398497349"
+  },
+  "name": "Woww",
+  "price": 150,
+  "model": "philips"
+},{
+  "_id": {
+    "$oid": "6338878914d1e5739849734b"
+  },
+  "name": "Yüksek",
+  "price": 1200,
+  "model": "Samsung"
+},{
+  "_id": {
+    "$oid": "633887bc14d1e5739849734c"
+  },
+  "name": "Yüksek",
+  "price": 300,
+  "model": "Arnica"
+},{
+  "_id": {
+    "$oid": "633889f5f45115099a461b0e"
+  },
+  "name": "En Ucuz"
+},{
+  "_id": {
+    "$oid": "633889f5f45115099a461b0f"
+  },
+  "name": "iphone14"
+},{
+  "_id": {
+    "$oid": "633889f5f45115099a461b10"
+  },
+  "name": "Woww",
+  "price": 53,
+  "tax": 10
+},{
+  "_id": {
+    "$oid": "63388b57f45115099a461b11"
+  },
+  "name": "iron",
+  "tax": 12
+},{
+  "_id": {
+    "$oid": "63388c92f45115099a461b12"
+  },
+  "price": 123,
+  "name": "Woww"
+},{
+  "_id": {
+    "$oid": "63388c92f45115099a461b13"
+  },
+  "name": "radio",
+  "tax": 8
+},{
+  "_id": {
+    "$oid": "633b335c8f6f738b65bcc825"
+  },
+  "price": 250,
+  "name": "Yüksek"
+}]

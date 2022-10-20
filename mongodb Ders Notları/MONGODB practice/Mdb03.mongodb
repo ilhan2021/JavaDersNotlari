@@ -1,0 +1,128 @@
+//=================================================================
+//            findOneAndUpdate - findOneAndReplace
+//=================================================================
+
+// A - findOneAndReplace() 
+//----------------------------
+//   1-) belirtilen koşullara uyan ilk sorguyu bulur ve degistirir. 
+//   2-) Komut icerisinde belirtilen kisimlari guncellerken bos birakilan 
+//       alanlari kaldirir. (API'lerdeki PUT metoduna benzetilebilir).
+//   3-) Islem sonunda VSCODE ilgili dokumanin guncellenMEmiş halini gosterir.yani ben bunu değiştirdim diye haber veriyor
+//   4-) SYNTAX
+//        db.collection.findOneAndReplace( {filter,old field}, {replacement}, {options} ) -->{filter,old field}, {replacement}->zorunlu {filter}, {replacement}, {options}->opsionel   
+//       
+// B - findOneAndUpdate() 
+//----------------------------
+///  1-) Belirtilen koşullara uyan ilk sorguyu bulur ve degistirir. 
+//   2-) Komut icerisinde belirtilen kisimlari guncellerken bos birakilan 
+//       alanlari modifiye etmez  (API'lerdeki PACTH metoduna benzetilebilir).
+//   3-) komutun kosul kismindan sonra degislikileri gerceklestirmek icin bir 
+//       atomic operator kullanilir. ($set (direk değer verilirse), $inc(arttırma azaltma), $mul (çarpma)vb.)
+//   4)  Islem sonunda VSCODE ilgili dokumanin guncellenMEmiş halini gosterir.
+//   5-) SYNTAX
+//       db.collection.findOneAndUpdate( {filter,old field}, {update->$set:{}}, {options} ) ******************
+//=================================================================
+
+
+use("GOOGLE");
+db.personel.insertMany([
+ {"name":"Ali Bak", "salary": 5000, "start_date":new Date('2014-03-01')},
+ {"name":"Can Tak", "salary": 7500, "start_date":new Date('2011-03-04')},
+ {"name":"Veli Gel", "salary": 3550, "start_date":new Date('2013-03-01')},
+ {"name":"Can Yak", "salary": 4800, "start_date":new Date('2011-09-30')},
+ {"name":"Veli Git", "salary": 7200, "start_date":new Date('2007-12-06')},
+ {"name":"Ali Han", "salary": 5250, "start_date":new Date('2004-11-21')},
+ {"name":"Ayse Gel", "salary": 10500, "start_date":new Date('1990-07-23')},
+ {"name":"Su Ak", "salary": 3300, "start_date":new Date('1999-03-30')},
+  ]);
+
+// -----------------------------------------------------------------
+//  QUERY 01 ... salary'si 5000 'den az olan ilk personelin salary'sini 6000 TL yapiniz.
+// -----------------------------------------------------------------
+
+// -----------------------------------------------------------------
+//  QUERY 02 ... salary'si 5250 olan ilk personelin salaryi'sni 15000, ismini "Haluk" ve 
+//               start_date su an olarak değiştiriniz.
+// -----------------------------------------------------------------
+
+
+
+// -----------------------------------------------------------------
+//  QUERY 03 ... salary'si en az olan personelin adini, noname, start_date'i
+//               nodate, salary'sini ise 0 yapiniz.
+// -----------------------------------------------------------------
+
+
+
+// -----------------------------------------------------------------
+//  QUERY 04 ... salary'si 7200 olan personelin sadece salary'sini 8000 yapiniz, (diger datalarını koruyunuz)
+// -----------------------------------------------------------------
+
+
+// -----------------------------------------------------------------
+// QUERY 05 ... salary'si 5000 veya ismi "Veli Git" olan personelin salary'sini 9000 , ismini MUZAFFER olarak değiştir.
+//              (diger datalarını koruyunuz)
+// -----------------------------------------------------------------
+
+//-----------------------------------------------------------------
+// QUERY 06 ... salary'si 7500 olan personelin salary'sine %10 zam yapiniz, 
+//               (diger datalarını koruyunuz)
+//-----------------------------------------------------------------
+
+//-----------------------------------------------------------------
+// QUERY 07 ... salary'si 4800 olan personelin salary'sina 500 TL zam yapiniz, 
+//              (diger datalarını koruyunuz).azaltmak için -500 yazabiliriz
+//-----------------------------------------------------------------
+
+
+// -----------------------------------------------------------------
+//  QUERY 08 ... salary'si 15000 olan personelin Adini "Faruk Duyar" ve start_date 
+//               su an olarak degisitriniz.Eger boyle bir dokuman yok ise yeni kayit olarak ekleyiniz.
+//-------------------------------------
+//  NOT: guncelleme (replace veya update) isleminde sorgu ile 
+//       eslesmeme durumu oldugunda dokumanin olusturulmasi istenirse
+//       {upsert:true} kullanilmalidir. VsCode console null return eder, compass ta datayı insert eder.
+
+// =================================================================
+//            updateOne - updateMany - update (depreceated)
+// 
+//   update komutlari ile de bir dokumandaki bigilerin bir kismi yada
+//   tamami guncellenebilir. update komutlari findOneAndUpdate komutuna
+//   gore daha hizli calisir. Bunun sebebi bu komutlarin sorguyu cevap
+//   olarak dondurmemesidi db'den data çekmemesidir. Sorgunun elemanları lazım değilse bu 
+//   komutlar sadece istatistik olarak kisa bilgiler dondurur.
+// =================================================================
+
+// -----------------------------------------------------------------
+//  QUERY 09 ... ismi Can Tak olan personelin salary'sini 12000'e guncelleyiniz.
+// -----------------------------------------------------------------
+
+// -----------------------------------------------------------------
+//  QUERY 10 ... salary'si 15000 olan personellerin dokumanina prim:1000 bilgisini ekleyiniz.
+// -----------------------------------------------------------------
+
+//-----------------------------------------------------------------
+// QUERY 11 ... salary'si 5000 olan personellerin dokumanina prim:200 bilgisini
+//              eger boyle bir personel yok ise (upsert:true) yeni bir kayit aciniz.yeni açılacağı için id li yazdırdı consol da
+//-----------------------------------------------------------------
+
+//-----------------------------------------------------------------
+// QUERY 12 ... key adını değiştirme. bütün dökümanların field ad larını değiştirelim
+//-----------------------------------------------------------------
+
+//=================================================================
+// deleteOne - deleteMany - (update-remove =depreceated=kullanımdan kalktı ocak 2022 de )
+//=================================================================
+
+//-----------------------------------------------------------------
+// QUERY 13 ... ismi Mehmet Can olan kaydi siliniz. 
+//-----------------------------------------------------------------
+
+//-----------------------------------------------------------------
+// QUERY 14 ... maasi 15000 olan dokumanlari siliniz. 
+//-----------------------------------------------------------------
+
+
+//-----------------------------------------------------------------
+// QUERY 15 ... Tum dokumanlari siliniz. 
+//-----------------------------------------------------------------
